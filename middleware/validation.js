@@ -60,18 +60,23 @@ exports.createPostValidator = (req, res, next) => {
     const schema = Joi.object({
         title: Joi.string()
             .min(3)
+            .required()
             .messages({
                 'string.base': `"title" should be a type of 'text'`,
                 'string.empty': `"title" cannot be an empty field`,
+                'any.required': `"title" is required field`,
                 'string.min': `"title" should have a minimum length of {#limit}`
             }),
         body: Joi.string()
             .min(10)
+            .required()
             .messages({
                 'string.base': `"body" should be a type of 'text'`,
                 'string.empty': `"body" cannot be an empty field`,
+                'any.required': `"body" is required field`,
                 'string.min': `"body" should have a minimum length of {#limit}`
             }),
+
     });
 
     const { error } = schema.validate(req.body);

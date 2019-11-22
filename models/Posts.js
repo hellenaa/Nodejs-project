@@ -12,19 +12,21 @@ const posts = db.define('posts', {
         },
         title: {
             type: Sequelize.STRING,
+            allowNull: false,
             set: function(val) {
                 this.setDataValue('title', val.trim());
             }
         },
         body: {
             type: Sequelize.TEXT,
+            allowNull: false,
             set: function(val) {
                 this.setDataValue('body', val.trim());
             }
         },
-        // photo: {
-        //    type: Sequelize.BLOB,
-        // },
+        photo: {
+           type: Sequelize.BLOB,
+        },
         createdAt: {
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW

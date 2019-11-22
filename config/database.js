@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize('node', 'postgres', '1', {
+module.exports = new Sequelize('postgres', 'postgres', '1', {
     host: 'localhost',
     dialect: 'postgres',
     // timezone: config.timezone,

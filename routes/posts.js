@@ -10,6 +10,7 @@ const crypto = require('crypto');  //generate random file names
 const path = require('path');  //module for working with path , esp getting the extname
 
 
+
 let upload = multer({
     storage: multer.diskStorage({
         destination: './uploads',
@@ -24,6 +25,9 @@ let upload = multer({
 
 
 router.post('/post/new/:userId', requireLogin, hasAuthorized, upload, validator.createPostValidator, createPost);
+
+router.post('/post/new/:userId', requireLogin, hasAuthorized, validator.createPostValidator, createPost);
+
 router.get('/posts/by/:userId', postsByUser);
 router.get('/posts', getPosts);
 

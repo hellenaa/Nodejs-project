@@ -4,7 +4,7 @@ const User = require('../models/Users');  //model
 
 
 exports.registerUser = async (req, res)=>{
-
+console.log(req.body.email);
     //check if user already exist
     let emailExist = await User.findOne({where: { email: req.body.email.trim() }});
     if(emailExist) return res.status(400).send('Email already exist');

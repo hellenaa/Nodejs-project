@@ -22,6 +22,8 @@ exports.getUser = async (req, res)=>{
 exports.userById = async (req, res, next, id)=>{
     User.findByPk(id)
         .then(user => {
+            if(!user) return res.status(400).json( "User not found" );
+
             req.profile = user;
             next();
         })
@@ -36,7 +38,7 @@ exports.hasAuthorized = async (req, res, next)=>{
     if(!authorized) {
         return res.status(403).json({
             error: "User is not authorized to perform this action"
-        });
+        })
     }
     next();
 };

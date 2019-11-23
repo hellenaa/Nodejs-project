@@ -76,7 +76,6 @@ exports.createPostValidator = (req, res, next) => {
                 'any.required': `"body" is required field`,
                 'string.min': `"body" should have a minimum length of {#limit}`
             }),
-
     });
 
     const { error } = schema.validate(req.body);

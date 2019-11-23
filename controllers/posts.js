@@ -14,7 +14,7 @@ exports.getPosts = async (req, res)=>{
 };
 
 exports.createPost = async (req, res)=> {
-
+console.log(req.body);
     let post = req.body;
     post.postedBy = req.profile.id;
     if(req.file) {

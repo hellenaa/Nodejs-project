@@ -4,7 +4,7 @@
   "/login": "login",
   "/logout": "logout",
   "users": "get all users",
-  "/user/:userId": "get user id",
+  "/user/:userId": "get user by id",
   "/posts": "get all posts",
   "/posts/by/:userId": "get posts by user",
   "/post/new/:userId": "create new post",

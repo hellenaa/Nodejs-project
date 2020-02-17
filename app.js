@@ -13,12 +13,13 @@ const db = require('./config/database');
 //test db
 db.authenticate()
     .then(() => console.log('Database connected'))
-    .catch(err => console.log('Error'+ err));
+    .catch(err => res.json({error: err}));
 
 //bringing routes
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
 const postsRoutes = require('./routes/posts');
+const aboutRoutes = require('./routes/about');
 //api docs
 app.get('/', (req, res) => {
     fs.readFile("docs/apiDocs.json", (err, data)=> {
@@ -38,6 +39,7 @@ app.use(cors());  // cors for using different domains and ports(like react 3000 
 app.use('/', authRoutes);
 app.use('/', usersRoutes);
 app.use('/', postsRoutes);
+app.use('/', aboutRoutes);
 app.use(function (err, req, res, next) {       //jwt token err showing
     if (err.name === 'UnauthorizedError') {
         res.status(401).send('invalid token...');

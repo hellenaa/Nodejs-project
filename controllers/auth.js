@@ -7,7 +7,7 @@ exports.registerUser = async (req, res)=>{
 console.log(req.body.email);
     //check if user already exist
     let emailExist = await User.findOne({where: { email: req.body.email.trim() }});
-    if(emailExist) return res.status(400).send('Email already exist');
+    if(emailExist) return res.status(400).json({error:'Email already exist'});
 
     //save user to database
     User.create({
@@ -27,12 +27,12 @@ exports.loginUser = async (req, res)=>{
 
     //check if user exist
     let user = await User.findOne({where: { email: req.body.email }});
-    if(!user) return res.status(403).send('User not found');
+    if(!user) return res.status(403).json({ error: 'User not found'});
 
 
     //check if password is correct
     await bcrypt.compare(req.body.password, user.password, function(err, result) {
-        if(!result) res.status(400).send('Password is wrong');
+        if(!result) res.status(400).json({error: 'Password is wrong'});
 
         //jwt token creating
         const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET);
@@ -40,8 +40,8 @@ exports.loginUser = async (req, res)=>{
         if(token) {
             res.cookie('t', token);
 
-            const {id, email} = user;
-            res.json({token, user: {id, email}});
+            const {id, firstName} = user;
+            res.json({token, user: {id, firstName}});
         }
 
 
